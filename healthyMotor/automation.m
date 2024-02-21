@@ -9,9 +9,9 @@ set_param(['healthyMotor','/','VoltageSource3'], 'Amplitude','230');
 sim("healthyMotor.slx");%filename
 
 
-dataMat = zeros(9, 5);
-z = [currentPhase1, currentPhase2, currentPhase3];
-for phaseNum = 1:3
+dataMat = zeros(18, 5);
+z = [currentPhase1, currentPhase2, currentPhase3, statorVoltage1, statorVoltage2, statorVoltage3];
+for phaseNum = 1:6
     phaseAmp = z(:, phaseNum);
     [c1, l1] = wavedec(phaseAmp, 5, "db6");
     for level = 1:5
