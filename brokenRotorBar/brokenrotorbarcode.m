@@ -6,11 +6,11 @@ numSamples = 1000;
 
 % Initialize arrays to store input features and target values
 inputFeatures = zeros(numSamples * 18, 6);  % Assuming 18 rows and 5 columns for statistical features; the additional column for sample number
-targetValues = zeros(numSamples*18, 2);  % Multi-class target values: 0 for healthy
+targetValues = zeros(numSamples*18, 2);  % Multi-class target values: 4 for broken rotor bar
 
 % Set initial parameter values
 initialValue = 220;
-finalValue = 240;
+finalValue = 240;  %reconsider
 
 % Calculate step size
 stepSize = (finalValue - initialValue) / (numSamples - 1);
@@ -45,17 +45,18 @@ for i = 1:numSamples
     end
 
     % Apply z-score normalization to the dataMat
-    dataMat(:, 2:6) = zscore(dataMat(:, 2:6));
+    dataMat(:, 1:5) = zscore(dataMat(:, 1:5));
 
     % Store statistical features as input features
     inputFeatures((i-1)*18 + 1 : i*18, 2:6) = dataMat;  %data
     inputFeatures((i-1)*18 + 1 : i*18, 1) = i;  % number of sample index
 
     % Set the target value for healthy motor
-    targetValues((i-1)*18 + 1 : i*18, 2) = 0; % data
+    targetValues((i-1)*18 + 1 : i*18, 2) = 4; % data
     targetValues((i-1)*18 + 1 : i*18, 1) = i; % number of sample index
 
 end
 
 % Save input features and target values to a MAT file
 save('ann_dataset_rotorbroken_gamma.mat', 'inputFeatures', 'targetValues');
+writematrix([inputFeaturesAll, targetValuesAll], 'ann_dataset_brokenrotorbar.csv');

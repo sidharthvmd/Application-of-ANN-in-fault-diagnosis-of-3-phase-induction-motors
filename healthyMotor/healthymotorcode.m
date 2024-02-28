@@ -1,15 +1,14 @@
-% Load the Simulink model
+
 load_system('healthyMotor.slx');
 
-% Set the number of samples
+
 numSamples = 1000;
 
-% Initialize arrays to store input features and target values
+%initialisation
 inputFeatures = zeros(numSamples * 18, 6);  % Assuming 18 rows and 5 columns for statistical features; the additional column for sample number
 targetValues = zeros(numSamples*18, 2);  % Multi-class target values: 0 for healthy
 
-% Set initial parameter values
-initialValue = 220;
+initialValue = 220;   %need to reconsider the healthy motor ranges
 finalValue = 240;
 
 % Calculate step size
@@ -27,7 +26,7 @@ for i = 1:numSamples
     sim("healthyMotor.slx");
 
     % Extract and process the data
-    dataMat = zeros(18, 5);
+    dataMat = zeros(18, 5);   % 18 = (3*3) for current and (3*3) for voltage
     z = [currentPhase1, currentPhase2, currentPhase3, statorVoltage1, statorVoltage2, statorVoltage3];
 
     for phaseNum = 1:6
@@ -45,7 +44,7 @@ for i = 1:numSamples
     end
 
     % Apply z-score normalization to the dataMat
-    dataMat(:, 2:6) = zscore(dataMat(:, 2:6));
+    dataMat(:, 1:5) = zscore(dataMat(:, 1:5));
 
     % Store statistical features as input features
     inputFeatures((i-1)*18 + 1 : i*18, 2:6) = dataMat;  %data
@@ -57,5 +56,6 @@ for i = 1:numSamples
 
 end
 
-% Save input features and target values to a MAT file
+% Save input features and target values to a MAT file and csv file
 save('ann_dataset_healthy.mat', 'inputFeatures', 'targetValues');
+writematrix([inputFeatures, targetValues], 'ann_dataset_healthy.csv');

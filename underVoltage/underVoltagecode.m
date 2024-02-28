@@ -1,14 +1,12 @@
-% Load the Simulink model
-load_system('underVoltage.slx');
 
-% Set the number of samples
+load_system('underVoltageFault.slx');
+
 numSamples = 1000;
 
-% Initialize arrays to store input features and target values
+% Initialize
 inputFeatures = zeros(numSamples * 18, 6);  % Assuming 18 rows and 5 columns for statistical features the additional column for samplenumber
 targetValues = zeros(numSamples*18, 2);  % Multi-class target values: 0 for healthy
 
-% Set initial parameter values
 initialValue = 75;
 finalValue = 215;
 
@@ -19,12 +17,12 @@ stepSize = (finalValue - initialValue) / (numSamples - 1);
 for i = 1:numSamples
     % Set parameter values
     voltageValue = initialValue + (i-1) * stepSize;
-    set_param(['underVoltage','/', 'VoltageSource1'], 'Amplitude', num2str(voltageValue));
-    set_param(['underVoltage','/','VoltageSource2'], 'Amplitude', num2str(voltageValue));
-    set_param(['underVoltage','/','VoltageSource3'], 'Amplitude', num2str(voltageValue));
+    set_param(['underVoltageFault','/', 'VoltageSource1'], 'Amplitude', num2str(voltageValue));
+    set_param(['underVoltageFault','/','VoltageSource2'], 'Amplitude', num2str(voltageValue));
+    set_param(['underVoltageFault','/','VoltageSource3'], 'Amplitude', num2str(voltageValue));
 
     % Simulate the model
-    sim("underVoltage.slx");
+    sim("underVoltageFault.slx");
 
     % Extract and process the data
     dataMat = zeros(18, 5);
@@ -44,15 +42,19 @@ for i = 1:numSamples
         end
     end
 
+    % Apply z-score normalization to the dataMat
+    dataMat(:, 1:5) = zscore(dataMat(:, 1:5));
+
     % Store statistical features as input features
     inputFeatures((i-1)*18 + 1 : i*18, 2:6) = dataMat;  %data
     inputFeatures((i-1)*18 + 1 : i*18, 1) = i;  % number of sample index
 
     % Set the target value for healthy motor
-    targetValues((i-1)*18 + 1 : i*18, 2) = 0; % data
+    targetValues((i-1)*18 + 1 : i*18, 2) = 2; % data
     targetValues((i-1)*18 + 1 : i*18, 1) = i; % number of sample index
 
 end
 
-% Save input features and target values to a MAT file
+% Save input features and target values to a MAT file and csv file
 save('ann_dataset_underVoltage.mat', 'inputFeatures', 'targetValues');
+writematrix([inputFeatures, targetValues], 'ann_dataset_underVoltage.csv');
