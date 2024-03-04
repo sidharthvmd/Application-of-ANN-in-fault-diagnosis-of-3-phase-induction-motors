@@ -40,12 +40,8 @@ for i = 1:numSamples
             n1 = norm(d1);
             dataMat(((3 * phaseNum) - 2), level) = m1;
             dataMat(((3 * phaseNum) - 2) + 1, level) = s1;
-            dataMat(((3 * phaseNum) - 2) + 2, level) = n1;
-        end
+            dataMat(((3 * phaseNum) - 2) + 2, level) = n1;  end
     end
-
-    dataMat(:, 1:5) = zscore(dataMat(:, 1:5));
-
     % Store statistical features as input features
     inputFeatures((i-1)*18 + 1 : i*18, 2:6) = dataMat;  %data
     inputFeatures((i-1)*18 + 1 : i*18, 1) = i;  % number of sample index
