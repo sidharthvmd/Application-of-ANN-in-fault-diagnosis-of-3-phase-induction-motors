@@ -56,4 +56,4 @@ end
 
 % Save input features and target values to a MAT file
 save('ann_dataset_rotorbroken_gamma.mat', 'inputFeatures', 'targetValues');
-writematrix([inputFeaturesAll, targetValuesAll], 'ann_dataset_brokenrotorbar.csv');
+writematrix([inputFeatures, targetValues], 'ann_dataset_brokenrotorbar.csv');
