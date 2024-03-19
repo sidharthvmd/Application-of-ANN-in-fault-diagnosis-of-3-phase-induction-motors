@@ -1,29 +1,34 @@
 
-load_system('healthyMotor.slx');
+load_system('Rphase.slx');
 
 
-numSamples = 1000;
+numSamples = 333;
 
 %initialisation
 inputFeatures = zeros(numSamples * 18, 6);  % Assuming 18 rows and 5 columns for statistical features; the additional column for sample number
-targetValues = zeros(numSamples*18, 2);  % Multi-class target values: 0 for healthy
+targetValues = zeros(numSamples*18, 2);  % Multi-class target values:
 
-initialValue = 220;   
-finalValue = 240;
+initialValueFaultRatio = 0.01;  
+finalValueFaultRatio = 0.1;
+
+initialValueFaultResistance = 100;
+finalValueFaultResistance = 315;
 
 % Calculate step size
-stepSize = (finalValue - initialValue) / (numSamples - 1);
+stepSizeFaultRatio = (finalValueFaultRatio - initialValueFaultRatio) / (numSamples - 1);
+stepSizeFaultResistance = (finalValueFaultResistance - initialValueFaultResistance) / (numSamples - 1);
 
 % Loop through samples
 for i = 1:numSamples
     % Set parameter values
-    voltageValue = initialValue + (i-1) * stepSize;
-    set_param(['healthyMotor','/', 'VoltageSource1'], 'Amplitude', num2str(voltageValue));
-    set_param(['healthyMotor','/','VoltageSource2'], 'Amplitude', num2str(voltageValue));
-    set_param(['healthyMotor','/','VoltageSource3'], 'Amplitude', num2str(voltageValue));
+    faultRatio = initialValueFaultRatio + (i-1) * stepSizeFaultRatio;
+    faultResistance = initialValueFaultResistance + (i-1) * stepSizeFaultResistance;
+    set_param(['Rphase','/', 'InductionMachine'], 'Kf', num2str(faultRatio));
+    set_param(['Rphase','/','InductionMachine'], 'Rf', num2str(faultResistance));
+    
 
     % Simulate the model
-    sim("healthyMotor.slx");
+    sim("Rphase.slx");
 
     % Extract and process the data
     dataMat = zeros(18, 5);   % 18 = (3*3) for current and (3*3) for voltage
@@ -48,11 +53,11 @@ for i = 1:numSamples
     inputFeatures((i-1)*18 + 1 : i*18, 1) = i;  % number of sample index
 
     % Set the target value for healthy motor
-    targetValues((i-1)*18 + 1 : i*18, 2) = 0; % data
+    targetValues((i-1)*18 + 1 : i*18, 2) = 4; % data
     targetValues((i-1)*18 + 1 : i*18, 1) = i; % number of sample index
 
 end
 
 % Save input features and target values to a MAT file and csv file
-save('ann_dataset_healthy.mat', 'inputFeatures', 'targetValues');
-writematrix([inputFeatures, targetValues], 'ann_dataset_healthy.csv');
+save('ann_dataset_brokenRotorBarRphase.mat', 'inputFeatures', 'targetValues');
+writematrix([inputFeatures, targetValues], 'ann_dataset_brokenRotorBarRphase.csv');
