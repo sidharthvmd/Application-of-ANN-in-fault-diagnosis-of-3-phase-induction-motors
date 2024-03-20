@@ -1,4 +1,4 @@
-filenames = {'ann_dataset_brokenrotorbar.xlsx', 'ann_dataset_overVoltage.xlsx', 'ann_dataset_underVoltage.xlsx', 'ann_dataset_healthy.xlsx'};
+filenames = {'ann_dataset_brokenrotorbar.xlsx', 'ann_dataset_overVoltage.xlsx', 'ann_dataset_underVoltage.xlsx', 'ann_dataset_healthy.xlsx', 'ann_dataset_singlePhasingFault'};
 sheet = 'Sheet1'; 
 
 for index = 1:length(filenames)
