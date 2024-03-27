@@ -20,6 +20,7 @@ stepSizeFaultResistance = (finalValueFaultResistance - initialValueFaultResistan
 
 % Loop through samples
 for i = 1:numSamples
+    disp(i)
     % Set parameter values
     faultRatio = initialValueFaultRatio + (i-1) * stepSizeFaultRatio;
     faultResistance = initialValueFaultResistance + (i-1) * stepSizeFaultResistance;
@@ -45,9 +46,11 @@ for i = 1:numSamples
             dataMat(((3 * phaseNum) - 2), level) = m1;
             dataMat(((3 * phaseNum) - 2) + 1, level) = s1;
             dataMat(((3 * phaseNum) - 2) + 2, level) = n1;
+            clc
+            disp(i)
         end
     end
-    disp(i)
+
 
     % Store statistical features as input features
     inputFeatures((i-1)*18 + 1 : i*18, 2:6) = dataMat;  %data
