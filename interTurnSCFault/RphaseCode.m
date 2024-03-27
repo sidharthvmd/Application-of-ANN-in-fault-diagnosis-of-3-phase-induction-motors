@@ -44,6 +44,7 @@ for i = 1:numSamples
             dataMat(((3 * phaseNum) - 2) + 2, level) = n1;
         end
     end
+    disp(i)
    
     % Store statistical features as input features
     inputFeatures((i-1)*18 + 1 : i*18, 2:6) = dataMat;  %data
