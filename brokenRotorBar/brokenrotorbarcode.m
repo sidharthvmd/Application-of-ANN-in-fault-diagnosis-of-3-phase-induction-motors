@@ -8,9 +8,11 @@ numSamples = 1000;
 inputFeatures = zeros(numSamples * 18, 6);  % Assuming 18 rows and 5 columns for statistical features; the additional column for sample number
 targetValues = zeros(numSamples*18, 2);  % Multi-class target values: 4 for broken rotor bar
 
+
+
 % Set initial parameter values
-initialValue = 220;
-finalValue = 240;  %reconsider
+initialValue = 1.2;
+finalValue = 314;  
 
 % Calculate step size
 stepSize = (finalValue - initialValue) / (numSamples - 1);
@@ -18,11 +20,9 @@ stepSize = (finalValue - initialValue) / (numSamples - 1);
 % Loop through samples
 for i = 1:numSamples
     % Set parameter values
-    voltageValue = initialValue + (i-1) * stepSize;
-    set_param(['rotorbroken_gamma','/', 'VoltageSource1'], 'Amplitude', num2str(voltageValue));
-    set_param(['rotorbroken_gamma','/','VoltageSource2'], 'Amplitude', num2str(voltageValue));
-    set_param(['rotorbroken_gamma','/','VoltageSource3'], 'Amplitude', num2str(voltageValue));
-
+    resistanceValue = initialValue + (i-1) * stepSize;
+    set_param(['rotorbroken_gamma','/', 'statorResistor'], 'Resistance', num2str(resistanceValue));
+    
     % Simulate the model
     sim("rotorbroken_gamma.slx");
 
@@ -49,11 +49,11 @@ for i = 1:numSamples
     inputFeatures((i-1)*18 + 1 : i*18, 1) = i;  % number of sample index
 
     % Set the target value for healthy motor
-    targetValues((i-1)*18 + 1 : i*18, 2) = 4; % data
+    targetValues((i-1)*18 + 1 : i*18, 2) = 5; % data
     targetValues((i-1)*18 + 1 : i*18, 1) = i; % number of sample index
 
 end
 
 % Save input features and target values to a MAT file
 save('ann_dataset_rotorbroken_gamma.mat', 'inputFeatures', 'targetValues');
-writematrix([inputFeaturesAll, targetValuesAll], 'ann_dataset_brokenrotorbar.csv');
+writematrix([inputFeatures, targetValues], 'ann_dataset_brokenrotorbar.csv');

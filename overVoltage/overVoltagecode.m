@@ -9,7 +9,7 @@ inputFeatures = zeros(numSamples * 18, 6);  % Assuming 18 rows and 5 columns for
 targetValues = zeros(numSamples*18, 2);  % Multi-class target values: 1 for overvoltage
 
 
-initialValue = 240;
+initialValue = 245;
 finalValue = 450;
 
 % Calculate step size
@@ -40,7 +40,8 @@ for i = 1:numSamples
             n1 = norm(d1);
             dataMat(((3 * phaseNum) - 2), level) = m1;
             dataMat(((3 * phaseNum) - 2) + 1, level) = s1;
-            dataMat(((3 * phaseNum) - 2) + 2, level) = n1;  end
+            dataMat(((3 * phaseNum) - 2) + 2, level) = n1;  
+        end
     end
     % Store statistical features as input features
     inputFeatures((i-1)*18 + 1 : i*18, 2:6) = dataMat;  %data
