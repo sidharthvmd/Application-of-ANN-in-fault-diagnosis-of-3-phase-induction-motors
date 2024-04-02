@@ -6,7 +6,7 @@
 - [Smriti Srinivas](https://github.com/SmritiSrinivas3)
 - [Sidhath P](https://github.com/sidharthvmd)
 - [Juan Thomas Mathew](https://github.com/juanthomasmathew)
-- [Riya Elsa Sunny](https://github.com/rianedi)
+- [Riya Elsa Sunny](https://github.com/RiyaElsaSunny)
 
  Save all MatLab files in 2023a version after modification
  <br>
