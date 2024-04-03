@@ -1,13 +1,11 @@
 data = readmatrix("training\randomized_data.csv");
 x = data(:,1:90);
 y = data(:,91);
-m = length (yt);
 
 xt = x';
 yt = y';
 
-
-num_hidden_layers = 20;
+num_hidden_layers = 450;
 rmse_train = zeros(1,num_hidden_layers);
 rmse_val = zeros(1,num_hidden_layers);
 
@@ -26,6 +24,9 @@ for i = 1:num_hidden_layers
     
     % Set training algorithm to Gradient Descent with backpropagation
     net.trainFcn = 'traingd';
+    
+    % Reduce the learning rate
+    net.trainParam.lr = 0.000001; % Adjust this value as needed
 
     % training the ANN
     [net,tr] = train(net, xt, yt);  
@@ -42,6 +43,9 @@ for i = 1:num_hidden_layers
     rmse_val(i) = sqrt(mean((yVal - yValTrue).^2));  % RMSE of validation set
     disp(i)
 end
+
+plot(1:450, rmse_train ); hold on; 
+plot(1:450, rmse_val); hold off;
 
 
 % Plot RMSE for different number of hidden layers
