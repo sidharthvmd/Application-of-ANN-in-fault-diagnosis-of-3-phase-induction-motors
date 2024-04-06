@@ -28,7 +28,7 @@ net.layers{end}.transferFcn = 'softmax';
 net.trainFcn = 'trainscg';
 
 % Adjust learning rate
-net.trainParam.lr = 0.00001; % Learning rate
+net.trainParam.lr = 0.001; % Learning rate
 
 % Set performance function to cross-entropy
 net.performFcn = 'crossentropy';
