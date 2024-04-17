@@ -29,7 +29,7 @@ for i = 1:numSamples
 
     % Extract and process the data
     dataMat = zeros(18, 5);   % 18 = (3*3) for current and (3*3) for voltage
-    z = [currentPhase1, currentPhase2, currentPhase3, statorVoltage1, statorVoltage2, statorVoltage3];
+    z = [statorCurrent1, statorCurrent2, statorCurrent3, statorVoltage1, statorVoltage2, statorVoltage3];
 
     for phaseNum = 1:6
         phaseAmp = z(:, phaseNum);
