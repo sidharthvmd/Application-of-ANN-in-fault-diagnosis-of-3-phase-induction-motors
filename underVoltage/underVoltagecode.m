@@ -7,8 +7,8 @@ numSamples = 1000;
 inputFeatures = zeros(numSamples * 18, 6);  % Assuming 18 rows and 5 columns for statistical features the additional column for samplenumber
 targetValues = zeros(numSamples*18, 2);  % Multi-class target values: 0 for healthy
 
-initialValue = 75;
-finalValue = 215;
+initialValue = 247.47;
+finalValue = 291;
 
 % Calculate step size
 stepSize = (finalValue - initialValue) / (numSamples - 1);
@@ -53,5 +53,5 @@ for i = 1:numSamples
 end
 
 % Save input features and target values to a MAT file and csv file
-save('ann_dataset_underVoltage.mat', 'inputFeatures', 'targetValues');
-writematrix([inputFeatures, targetValues], 'ann_dataset_underVoltage.csv');
+save('ann_dataset_underVoltage_new2.mat', 'inputFeatures', 'targetValues');
+writematrix([inputFeatures, targetValues], 'ann_dataset_underVoltage_new2.csv');

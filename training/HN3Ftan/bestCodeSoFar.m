@@ -13,18 +13,18 @@ y = y - min(y) + 1;
 yt = ind2vec(y');
 
 % Define the neural network architecture
-hiddenLayerSize = 3; % Two hidden layers, each containing two neurons 
+hiddenLayerSize = [3,5,3]; % Two hidden layers, each containing two neurons 
 net = patternnet(hiddenLayerSize);
 
 % Set activation function to hyperbolic tangent for hidden layers
 for j = 1:length(hiddenLayerSize)
-    net.layers{j}.transferFcn = 'tansig'; % Hyperbolic tangent activation function
+    net.layers{j}.transferFcn = 'poslin'; % Hyperbolic tangent activation function
 end
 
 % Set activation function of output layer to softmax
 net.layers{end}.transferFcn = 'softmax';
 
-% Set training algorithm 
+% Set training algorithm - scaled conjugate gradient descent
 net.trainFcn = 'trainscg';
 
 % Adjust learning rate

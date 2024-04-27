@@ -12,7 +12,7 @@ y = y - min(y) + 1;
 yt = ind2vec(y');
 
 % Define the neural network architecture
-hiddenLayerSize = 3; % Two hidden layers, each containing three neurons
+hiddenLayerSize = [2,1,3]; % Two hidden layers, each containing three neurons
 net = patternnet(hiddenLayerSize);
 
 % Set activation function to hyperbolic tangent for hidden layers
@@ -102,7 +102,7 @@ disp('F1-score:');
 disp(f1_score);
 
 % Generate perturbed data by adding Gaussian noise to the original input data
-noise_level = 0.01; % Adjust the noise level as needed
+noise_level = 0.04; % Adjust the noise level as needed
 perturbed_x_test = x_test + noise_level * randn(size(x_test));
 
 % Test the trained model using the perturbed data

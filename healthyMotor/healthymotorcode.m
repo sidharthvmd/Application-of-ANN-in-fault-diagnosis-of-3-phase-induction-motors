@@ -8,8 +8,8 @@ numSamples = 1000;
 inputFeatures = zeros(numSamples * 18, 6);  % Assuming 18 rows and 5 columns for statistical features; the additional column for sample number
 targetValues = zeros(numSamples*18, 2);  % Multi-class target values: 0 for healthy
 
-initialValue = 220;   
-finalValue = 240;
+initialValue = 292.74;   
+finalValue = 357.79;
 
 % Calculate step size
 stepSize = (finalValue - initialValue) / (numSamples - 1);
@@ -54,5 +54,5 @@ for i = 1:numSamples
 end
 
 % Save input features and target values to a MAT file and csv file
-save('ann_dataset_healthy.mat', 'inputFeatures', 'targetValues');
-writematrix([inputFeatures, targetValues], 'ann_dataset_healthy.csv');
+save('ann_dataset_healthy_new2.mat', 'inputFeatures', 'targetValues');
+writematrix([inputFeatures, targetValues], 'ann_dataset_healthy_new2.csv');

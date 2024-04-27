@@ -59,5 +59,5 @@ for i = 1:numSamples
 end
 
 % Save input features and target values to a MAT file and csv file
-save('ann_dataset_brokenRotorBarYphase.mat', 'inputFeatures', 'targetValues');
-writematrix([inputFeatures, targetValues], 'ann_dataset_brokenRotorBarYphase.csv');
+save('ann_dataset_brokenRotorBarYphase_new2.mat', 'inputFeatures', 'targetValues');
+writematrix([inputFeatures, targetValues], 'ann_dataset_brokenRotorBarYphase_new2.csv');

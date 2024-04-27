@@ -9,8 +9,8 @@ inputFeatures = zeros(numSamples * 18, 6);  % Assuming 18 rows and 5 columns for
 targetValues = zeros(numSamples*18, 2);  % Multi-class target values: 1 for overvoltage
 
 
-initialValue = 245;
-finalValue = 450;
+initialValue = 358;
+finalValue = 445.47;
 
 % Calculate step size
 stepSize = (finalValue - initialValue) / (numSamples - 1);
@@ -28,7 +28,7 @@ for i = 1:numSamples
 
     % Extract and process the data
     dataMat = zeros(18, 5);
-    z = [statorCurrent1, statorCurrent2, statorCurrent3, currentPhase3, statorVoltage1, statorVoltage2, statorVoltage3];
+    z = [statorCurrent1, statorCurrent2, statorCurrent3, statorVoltage1, statorVoltage2, statorVoltage3];
 
     for phaseNum = 1:6
         phaseAmp = z(:, phaseNum);
@@ -54,5 +54,5 @@ for i = 1:numSamples
 end
 
 % Save input features and target values to a MAT file and csv file
-save('ann_dataset_overVoltage.mat', 'inputFeatures', 'targetValues');
-writematrix([inputFeatures, targetValues], 'ann_dataset_overVoltage.csv');
+save('ann_dataset_overVoltage_new2.mat', 'inputFeatures', 'targetValues');
+writematrix([inputFeatures, targetValues], 'ann_dataset_overVoltage_new2.csv');
