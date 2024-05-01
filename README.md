@@ -1,6 +1,6 @@
-# Fault Detection in 3phase Induction Motor
- ANN Model for Fault Detection in 3 phase Induction Motor
- Final Year Project of MEC 2k24 Electrical batch
+# Fault Diagnosis in 3phase Induction Motor
+ ANN Model for Fault Diagnosis in 3 phase Induction Motor
+ Final Year Project of MEC 2020-2024 EEE batch
  <br> <br>
  **Team**
 - [Smriti Srinivas](https://github.com/SmritiSrinivas3)
@@ -12,4 +12,4 @@
  <br>
  [Documentation](https://drive.google.com/drive/folders/1l735utSBESm4aWUhZP7Fw9WNDbQ7vH_g)
  <br>
-[Flowchart figma file](https://www.figma.com/file/rK7koNE8wfFSmE9n1LyijN/Untitled?type=whiteboard&node-id=0%3A1&t=qgPeg89FUA2AHYKc-1)
+[Flowchart of Automation code figma file](https://www.figma.com/file/rK7koNE8wfFSmE9n1LyijN/Untitled?type=whiteboard&node-id=0%3A1&t=qgPeg89FUA2AHYKc-1)

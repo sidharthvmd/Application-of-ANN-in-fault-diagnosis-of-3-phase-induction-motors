@@ -6,7 +6,7 @@ numSamples = 333;
 
 %initialisation
 inputFeatures = zeros(numSamples * 18, 6);  % Assuming 18 rows and 5 columns for statistical features; the additional column for sample number
-targetValues = zeros(numSamples*18, 2);  % Multi-class target values: 0 for healthy
+targetValues = zeros(numSamples*18, 2);  % Multi-class target values
 
 initialValueFaultRatio = 0.01;  
 finalValueFaultRatio = 0.1;
@@ -56,12 +56,12 @@ for i = 1:numSamples
     inputFeatures((i-1)*18 + 1 : i*18, 2:6) = dataMat;  %data
     inputFeatures((i-1)*18 + 1 : i*18, 1) = i;  % number of sample index
 
-    % Set the target value for healthy motor
+    % Set the target value 
     targetValues((i-1)*18 + 1 : i*18, 2) = 4; % data
     targetValues((i-1)*18 + 1 : i*18, 1) = i; % number of sample index
 
 end
 
 % Save input features and target values to a MAT file and csv file
-save('ann_dataset_brokenRotorBarBphase.mat', 'inputFeatures', 'targetValues');
-writematrix([inputFeatures, targetValues], 'ann_dataset_brokenRotorBarBphase.csv');
+save('ann_dataset_ITSCBphase.mat', 'inputFeatures', 'targetValues');
+writematrix([inputFeatures, targetValues], 'ann_dataset_ITSCBphase.csv');

@@ -55,7 +55,7 @@ for voltageSourceIndex = 1:3
         inputFeatures((i-1)*18 + 1 : i*18, 2:6) = dataMat;  % data
         inputFeatures((i-1)*18 + 1 : i*18, 1) = i;  % number of sample index
 
-        % Set the target value for healthy motor
+        % Set the target value 
         targetValues((i-1)*18 + 1 : i*18, 2) = 3; % data
         targetValues((i-1)*18 + 1 : i*18, 1) = i; % number of sample index
     end

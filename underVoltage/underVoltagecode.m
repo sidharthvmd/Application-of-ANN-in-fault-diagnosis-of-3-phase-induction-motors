@@ -4,8 +4,8 @@ load_system('underVoltageFault.slx');
 numSamples = 1000;
 
 % Initialize
-inputFeatures = zeros(numSamples * 18, 6);  % Assuming 18 rows and 5 columns for statistical features the additional column for samplenumber
-targetValues = zeros(numSamples*18, 2);  % Multi-class target values: 0 for healthy
+inputFeatures = zeros(numSamples * 18, 6);  % Assuming 18 rows and 5 columns for statistical features the additional column for sample number
+targetValues = zeros(numSamples*18, 2);  % Multi-class target values
 
 initialValue = 247.47;
 finalValue = 291;
@@ -46,7 +46,7 @@ for i = 1:numSamples
     inputFeatures((i-1)*18 + 1 : i*18, 2:6) = dataMat;  %data
     inputFeatures((i-1)*18 + 1 : i*18, 1) = i;  % number of sample index
 
-    % Set the target value for healthy motor
+    % Set the target value
     targetValues((i-1)*18 + 1 : i*18, 2) = 2; % data
     targetValues((i-1)*18 + 1 : i*18, 1) = i; % number of sample index
 
