@@ -1,5 +1,6 @@
 # Fault Diagnosis of 3phase Induction Motor
  ANN Model for diagnosing multiple Electrical and Mechanical faults in 3 phase Induction Motor
+ <br><br>
  Final Year Project of Govt. Model Engineering College 2020-2024 EEE batch
  <br> <br>
  **Team**
